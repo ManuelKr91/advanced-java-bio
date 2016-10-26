@@ -22,61 +22,39 @@ public class Sequence {
     private int longD;
     private int avgD;
 
-    /**
-     * read sequences from file in fastA format
-     *
-     * @param r
-     */
+
     public void read(Reader r) throws IOException {
 
         BufferedReader br = new BufferedReader(r);
         String sequence = "";
         String line;
 
-        // Schleife durch File bis Ende erreicht wurde
-        // wenn Anfang Header erreicht wurde, speichert in headers
-        // Sequence: einzelnen Zeilen aufaddieren
         while ((line = br.readLine()) != null) {
             if (line.charAt(0) == '>') {
                 headers.add(line);
-                sequences.add(sequence); // wenn > erreicht wird, wird vorherige Sequence gespeichert und neue erzeugt
+                sequences.add(sequence); 
                 sequence = "";
-                // wenn erste Position nicht ">" --> Seqeunce erreicht
+
             } else {
                 sequence += line;
             }
         }
-        sequences.add(sequence); // letzte Sequence erstellt
+        sequences.add(sequence); 
         sequences.remove(0);
         br.close();
     }
 
-    /**
-     * get number of sequences
-     *
-     * @return size
-     */
+ 
     public int size() {
 
         return headers.size();
     }
 
-    /**
-     * get the i-th header
-     *
-     * @param i
-     * @return i-th header
-     */
     public String getHeader(int i) {
-        return headers.get(i); //faengt bei 0 an zu zaehelen
+        return headers.get(i);
     }
 
-    /**
-     * get the i-th sequences
-     *
-     * @param i
-     * @return i-th sequence
-     */
+
     public String getSequence(int i) {
 
         return sequences.get(i);
